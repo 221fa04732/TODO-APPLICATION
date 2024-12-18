@@ -14,7 +14,7 @@ export default function TodoList({todos})
         onClick={async()=>{
             setloading(true)
             try{
-                const tododata = await axios.put("http://localhost:3000/todoMark/mark-as-done",{id: todos._id, todoStatus : todos.completed})
+                const tododata = await axios.put("https://todo-application-cz2m.onrender.com/todoMark/mark-as-done",{id: todos._id, todoStatus : todos.completed})
 
                 setNotification({
                     show : true,
@@ -40,7 +40,7 @@ export default function TodoList({todos})
         {todos.completed && <button className="absolute bottom-1 right-1" onClick={async()=>{
             setloading(true)
             try{
-                const tododata = await axios.put('http://localhost:3000/delete/delete-todo' , {id : todos._id})
+                const tododata = await axios.put('https://todo-application-cz2m.onrender.com/delete/delete-todo' , {id : todos._id})
 
                     setNotification({
                         show : true,

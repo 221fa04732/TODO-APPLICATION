@@ -8,9 +8,6 @@ import {NotificationAtom} from './Atoms/NotificationAtom'
 import { useRecoilState } from 'recoil'
 import axios from 'axios'
 
-const API_BASE_URL= process.env.REACT_APP_API_URL;
-
-
 function App() {
 
   const[todo, setTodo] = useState([]);
@@ -19,7 +16,7 @@ function App() {
 
 
   useEffect(()=>{
-      fetch(`${API_BASE_URL}/your/todo-list`)
+      fetch('https://todo-application-cz2m.onrender.com/your/todo-list')
       .then(async function(res){
         const json = await res.json();
         setTodo(json.todo)
@@ -29,7 +26,7 @@ function App() {
 
   useEffect(()=>{
     setInterval(async()=>{
-      const tempTodo = await axios.get(`${API_BASE_URL}/your/todo-list`)
+      const tempTodo = await axios.get('https://todo-application-cz2m.onrender.com/your/todo-list')
       setTodo(tempTodo.data.todo)
     },60000)
     

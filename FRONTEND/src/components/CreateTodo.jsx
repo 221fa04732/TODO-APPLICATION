@@ -16,7 +16,7 @@ export function CreateTodo(){
 
         setloading(true)
         try{
-            fetch("http://localhost:3000/create/new-todo", {
+            fetch("https://todo-application-cz2m.onrender.com/create/new-todo", {
                 method :"POST",
                 body : JSON.stringify({
                     title: title,
