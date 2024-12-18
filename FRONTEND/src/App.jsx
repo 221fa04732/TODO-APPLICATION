@@ -19,7 +19,7 @@ function App() {
 
 
   useEffect(()=>{
-      fetch(`${API_BASE_URL}/api/your/todo-list`)
+      fetch(`${API_BASE_URL}/your/todo-list`)
       .then(async function(res){
         const json = await res.json();
         setTodo(json.todo)
@@ -29,7 +29,7 @@ function App() {
 
   useEffect(()=>{
     setInterval(async()=>{
-      const tempTodo = await axios.get(`${API_BASE_URL}/api/your/todo-list`)
+      const tempTodo = await axios.get(`${API_BASE_URL}/your/todo-list`)
       setTodo(tempTodo.data.todo)
     },60000)
     
