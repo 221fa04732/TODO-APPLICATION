@@ -1,5 +1,7 @@
 ## TODO APPLICATION
 
+![Screensort](FRONTEND/public/Screenshot 2024-12-18 192751.png)
+
 This project contain a simple TODO application that have some basic functionality that user can perform on it.
 
 It has the following functionality -
