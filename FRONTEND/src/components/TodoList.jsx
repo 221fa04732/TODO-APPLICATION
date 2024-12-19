@@ -28,6 +28,7 @@ export default function TodoList({todos})
                     message : 'An Error Occured',
                     status : 404
                 })
+                setloading(false)
             }
 
         }}></button>
@@ -54,6 +55,7 @@ export default function TodoList({todos})
                     message : 'An Error Occured',
                     status : 404
                 })
+                setloading(false)
             }
         }}><img src="delete.png" className="max-h-5 min-h-5 max-w-5 min-w-5" /></button>}
 

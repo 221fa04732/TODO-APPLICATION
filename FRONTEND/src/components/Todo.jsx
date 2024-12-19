@@ -1,7 +1,7 @@
 import TodoList from './TodoList'
 
 export function Todo({todo}){
-    return <div>
+    return <div className='w-11/12'>
         {todo.map(function(todos){
             if(!todos.completed)
             return(<TodoList todos={todos} key={todos._id}/>)

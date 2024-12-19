@@ -1,6 +1,6 @@
 export default function Loader()
 {
-    return(<div>
+    return(<div className="w-11/12">
         <div >
             <div className="bg-stone-800 border border-gray-400 rounded w-full p-2 mb-4 relative">
                 <div className="border-2 border-gray-400 rounded-full max-h-4 min-h-4 max-w-4 min-w-4 absolute"></div>

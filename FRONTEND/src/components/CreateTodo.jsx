@@ -50,7 +50,7 @@ export function CreateTodo(){
 
     }
 
-    return <form onSubmit={handlesubmit} className="bg-stone-800 flex relative border border-gray-400 p-2 rounded">
+    return <form onSubmit={handlesubmit} className="bg-stone-800 w-11/12 flex relative border border-gray-400 p-2 rounded">
         <div className="w-full pr-8">
             <input className="bg-stone-800 w-full border-b border-gray-400 px-1 focus:outline-none" type="text"     
                 placeholder="title"
