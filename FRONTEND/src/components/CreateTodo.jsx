@@ -46,6 +46,7 @@ export function CreateTodo(){
                 message : "An Error Occured",
                 status : 404
             })
+            setloading(false)
         }
 
     }
