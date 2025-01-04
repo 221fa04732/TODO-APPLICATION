@@ -7,9 +7,11 @@ router.use(cors())
 router.use(express.json())
 
 router.get('/todo-list', async(req, res)=>{
+
+    const id = req.body.id;
     
     try{
-        const todoLists =await todo.find({});
+        const todoLists =await todo.find({id : id});
         res.status(200).json({
             todo : todoLists
         })
@@ -17,7 +19,7 @@ router.get('/todo-list', async(req, res)=>{
 
     catch(error){
         res.status(404).json({
-            msg : "Server Error"
+            msg : "Server Error aa raha hai"
         })
     }
 })

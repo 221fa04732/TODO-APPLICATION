@@ -9,15 +9,18 @@ router.use(express.json())
 
 router.post('/new-todo', async(req, res)=>{
     const payLoad = req.body;
-    const parsePayLoad = createTodo.safeParse(payLoad);
-    if(!parsePayLoad){
-        res.status(411).json({
-            msg : "Incorrect Input"
+
+    const validateTodo=createTodo.safeParse(payLoad)
+    if(!validateTodo.success){
+        res.status(401).json({
+            msg : "Invalid Input"
         })
         return;
     }
+
     try{
         await todo.create({
+            id : payLoad.id,
             title : payLoad.title,
             description : payLoad.description,
             completed : false
