@@ -35,8 +35,12 @@ export default function SignUp(){
                 setEmail('')
                 setPassword('')
                 setUsername('')
-                setLoginStatus.status(false)
-                setSignStatus.status(0)
+                setLoginStatus({
+                    status : false
+                })
+                setSignStatus({
+                    status : 0
+                })
             }
 
             setNotification({
@@ -102,16 +106,18 @@ export default function SignUp(){
 
 
                     <button type='submit' className='border bg-blue-700 rounded w-full border-blue-700 p-2 text-white font-semibold hover:bg-blue-600 mb-1'>SignUp</button>
-                    
-                    
-                    <div className='w-full'>
-                        <span className='text-blue-600 text-lg'>Already Have an Account? </span>
-                        <button className='text-red-500'onClick={()=>{
-                            setSignStatus.status(0)
-                        }}>Click Here</button>
-                    </div>
 
                 </form>
+
+                <div className='w-full'>
+                    <span className='text-blue-600 text-lg'>Already Have an Account? </span>
+                    <button className='text-red-500'onClick={()=>{
+                        setSignStatus({
+                            status :0
+                        })
+                    }}>Click Here</button>
+                </div>
+
             </div>
         </div>
 

@@ -10,7 +10,7 @@ function App() {
   const [loginStatus, setLoginStatus] = useRecoilState(LoginStatus)
   const [signStatus, setSignStatus] = useRecoilState(SignStatus)
 
-  return (<> {loginStatus.status ? <LandingPage /> : <>{signStatus==0 ? <SignIn /> : <SignUp />}</> } </>)
+  return (<> {loginStatus.status ? <LandingPage /> : <>{signStatus.status===0 ? <SignIn /> : <SignUp />}</> } </>)
 }
 
 export default App

@@ -30,13 +30,17 @@ export default function SignIn(){
 
             if(user.status === 200){
 
-                setSignStatus.email(email)
-                setSignStatus.id(user.data.id)
-                setSignStatus.username(user.data.userName)
+                setSignStatus({
+                    status : 1,
+                    email : email,
+                    id : user.data.id,
+                    username : user.data.userName
+                })
                 setEmail('')
                 setPassword('')
-                setSignStatus.status(0)
-                setLoginStatus.status(true)
+                setLoginStatus({
+                    status : true
+                })
                 setNotification({
                     show : true,
                     message : `Welcome ${user.data.userName}`,
@@ -100,15 +104,18 @@ export default function SignIn(){
                     </fieldset>
 
                     <button className='border bg-blue-700 rounded w-full border-blue-700 p-2 text-white font-semibold hover:bg-blue-600 mb-1' type='submit'>SignIn</button>
-                    
-                    <div className='w-full'>
-                        <span className='text-blue-600 text-lg'>Don't Have an Account? </span>
-                        <button className='text-red-500'onClick={()=>{
-                            setSignStatus.status(1)
-                        }}>Create One</button>
-                    </div>
 
                 </form>
+
+                <div className='w-full'>
+                    <span className='text-blue-600 text-lg'>Don't Have an Account? </span>
+                    <button className='text-red-500'onClick={()=>{
+                        setSignStatus({
+                            status : 1
+                        })
+                    }}>Create One</button>
+                </div>
+
             </div>
         </div>
 

@@ -6,7 +6,7 @@ const cors = require('cors')
 router.use(cors())
 router.use(express.json())
 
-router.get('/user', async(req, res)=>{
+router.post('/user', async(req, res)=>{
 
     const email= req.body.Email
     const password = req.body.Password
