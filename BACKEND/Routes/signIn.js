@@ -17,14 +17,14 @@ router.post('/user', async(req, res)=>{
         });
 
         if(findUser.length===0){
-            res.status(411).json({
+            res.status(201).json({
                 msg : "Email Not Register"
             })
             return;
         }
 
         if(findUser.length!=0 && findUser[0].Password != password){
-            res.status(411).json({
+            res.status(201).json({
                 msg : "Incorrect Password"
             })
             return;

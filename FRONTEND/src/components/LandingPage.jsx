@@ -7,6 +7,7 @@ import { Loading } from '../Atoms/LoaderAtom'
 import {NotificationAtom} from '../Atoms/NotificationAtom'
 import { useRecoilState } from 'recoil'
 import axios from 'axios'
+import {SignStatus} from '../Atoms/SignStatus'
 
 
 export function LandingPage(){
@@ -14,19 +15,21 @@ export function LandingPage(){
     const[todo, setTodo] = useState([]);
     const[loading, setloading] = useRecoilState(Loading)
     const [notification, setNotification]= useRecoilState(NotificationAtom)
+    const [signstatus, setSignstatus] = useRecoilState(SignStatus)
 
-    useEffect(()=>{
-        fetch('https://todo-application-cz2m.onrender.com/your/todo-list')
-        .then(async function(res){
-          const json = await res.json();
-          setTodo(json.todo)
-          setloading(false)  
-        })
+    useEffect(async()=>{
+      const tempTodo = await axios.post('https://todo-application-cz2m.onrender.com/your/todo-list',{
+        id : signstatus.id
+      })
+      setTodo(tempTodo.data.todo)
+      setloading(false)  
     }, [loading])
     
     useEffect(()=>{
       setInterval(async()=>{
-        const tempTodo = await axios.get('https://todo-application-cz2m.onrender.com/your/todo-list')
+        const tempTodo = await axios.post('https://todo-application-cz2m.onrender.com/your/todo-list',{
+          id : signstatus.id
+        })
         setTodo(tempTodo.data.todo)
       },60000)
       

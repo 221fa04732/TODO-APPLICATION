@@ -20,7 +20,7 @@ router.post('/user', async(req, res)=>{
         Password :Password
     })
     if(!validateUser.success){
-        res.status(401).json({
+        res.status(201).json({
             msg : "Invalid Credentials"
         })
         return;
@@ -34,7 +34,7 @@ router.post('/user', async(req, res)=>{
         });
 
         if(findUser){
-            res.status(409).json({
+            res.status(201).json({
                 msg : "User already exists"
             })
             return;

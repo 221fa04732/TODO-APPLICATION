@@ -21,17 +21,13 @@ export default function SignUp(){
         event.preventDefault();
 
         try{
-            const user=await axios.post({
-                url: 'https://todo-application-cz2m.onrender.com/signup/user',
-                data: {
-                    UserName : username,
-                    Email : email, 
-                    Password : password
-                }
+            const user=await axios.post('https://todo-application-cz2m.onrender.com/signup/user',{
+                UserName : username,
+                Email : email, 
+                Password : password
             });
 
             if(user.status === 200){
-                
                 setEmail('')
                 setPassword('')
                 setUsername('')

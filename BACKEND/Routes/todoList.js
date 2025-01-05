@@ -6,7 +6,7 @@ const cors = require('cors')
 router.use(cors())
 router.use(express.json())
 
-router.get('/todo-list', async(req, res)=>{
+router.post('/todo-list', async(req, res)=>{
 
     const id = req.body.id;
     
@@ -19,7 +19,7 @@ router.get('/todo-list', async(req, res)=>{
 
     catch(error){
         res.status(404).json({
-            msg : "Server Error aa raha hai"
+            msg : "Server Error"
         })
     }
 })

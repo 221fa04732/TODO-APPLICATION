@@ -12,7 +12,7 @@ router.post('/new-todo', async(req, res)=>{
 
     const validateTodo=createTodo.safeParse(payLoad)
     if(!validateTodo.success){
-        res.status(401).json({
+        res.status(201).json({
             msg : "Invalid Input"
         })
         return;

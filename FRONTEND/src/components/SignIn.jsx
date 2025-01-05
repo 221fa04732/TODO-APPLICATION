@@ -20,14 +20,12 @@ export default function SignIn(){
         event.preventDefault();
 
         try{
-            const user=await axios.post({
-                url: 'https://todo-application-cz2m.onrender.com/signin/user',
-                data: {
+            const user=await axios.post('https://todo-application-cz2m.onrender.com/signin/user',{
                     Email : email, 
                     Password : password
                 }
-            });
-
+            );
+            
             if(user.status === 200){
 
                 setSignStatus({
