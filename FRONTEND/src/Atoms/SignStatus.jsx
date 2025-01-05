@@ -2,5 +2,10 @@ import {atom} from 'recoil'
 
 export const SignStatus= atom({
     key : "SignStatus",
-    default : 0
+    default : {
+        status : 0,
+        id : '',
+        username : '',
+        email : ''
+    }
 })

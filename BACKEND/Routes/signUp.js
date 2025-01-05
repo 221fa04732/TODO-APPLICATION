@@ -48,7 +48,7 @@ router.post('/user', async(req, res)=>{
         })
 
         res.status(200).json({
-            msg : "SignUp Sucessful"
+            msg : "SignUp Successful"
         })
 
     }

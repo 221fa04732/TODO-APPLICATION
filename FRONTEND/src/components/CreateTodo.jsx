@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Loading } from '../Atoms/LoaderAtom'
 import { NotificationAtom } from "../Atoms/NotificationAtom";
 import { useRecoilState } from 'recoil'
+import {SignStatus} from '../Atoms/SignStatus'
 
 export function CreateTodo(){
 
@@ -9,6 +10,7 @@ export function CreateTodo(){
     const [description, setDescription] = useState("")
     const [loading, setloading] = useRecoilState(Loading)
     const [notification , setNotification] = useRecoilState(NotificationAtom)
+    const [signStatus, setSignStatus] = useRecoilState(SignStatus)
 
     async function handlesubmit(event)
     {
@@ -19,6 +21,7 @@ export function CreateTodo(){
             fetch("https://todo-application-cz2m.onrender.com/create/new-todo", {
                 method :"POST",
                 body : JSON.stringify({
+                    id : signStatus.id,
                     title: title,
                     description : description
                 }),
@@ -58,7 +61,6 @@ export function CreateTodo(){
                 required
                 value={title}
                 onChange={function(e){
-                const value = e.target.value;
                 setTitle(e.target.value)
             }}></input><br />
 
@@ -67,7 +69,6 @@ export function CreateTodo(){
                 required
                 value={description}
                 onChange={function(e){
-                const value = e.target.value;
                 setDescription(e.target.value)
             }}></input><br />
         </div>

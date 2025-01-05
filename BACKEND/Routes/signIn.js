@@ -32,6 +32,7 @@ router.get('/user', async(req, res)=>{
 
 
         res.status(200).json({
+            msg : "SignIn Successful",
             id : findUser[0]._id,
             userName : findUser[0].UserName,
         })
