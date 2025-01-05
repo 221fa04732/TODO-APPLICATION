@@ -17,12 +17,21 @@ export function LandingPage(){
     const [notification, setNotification]= useRecoilState(NotificationAtom)
     const [signstatus, setSignstatus] = useRecoilState(SignStatus)
 
-    useEffect(async()=>{
-      const tempTodo = await axios.post('https://todo-application-cz2m.onrender.com/your/todo-list',{
-        id : signstatus.id
+    useEffect(()=>{
+      fetch("https://todo-application-cz2m.onrender.com/your/todo-list", {
+        method :"POST",
+        body : JSON.stringify({
+            id : signstatus.id
+        }),
+        headers:{
+            "Content-type": "application/json"
+        }
+      }).then(async function(res){
+        const json = await res.json();
+        setTodo(json.todo)
+        setloading(false)  
       })
-      setTodo(tempTodo.data.todo)
-      setloading(false)  
+      
     }, [loading])
     
     useEffect(()=>{
@@ -31,8 +40,8 @@ export function LandingPage(){
           id : signstatus.id
         })
         setTodo(tempTodo.data.todo)
+        setloading(false)
       },60000)
-      
     },[])
 
     return(<div className=' bg-stone-800 text-white w-full min-h-screen'>

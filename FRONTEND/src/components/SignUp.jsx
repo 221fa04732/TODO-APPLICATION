@@ -62,8 +62,8 @@ export default function SignUp(){
                 <img src="/list.png" className='md:max-h-40 md:max-w-36 max-h-28 max-w-20 pb-3'/>
                 <div className='text-orange-600 font-semibold text-4xl font-serif'>TODO APP</div>
             </div>
-            <div className='w-full flex items-center justify-center'>
-                <form onSubmit={handlesubmit} className='w-11/12 flex flex-col items-center justify-center'>
+            <div className='w-11/12 flex flex-col items-center justify-center'>
+                <form onSubmit={handlesubmit} className='w-full flex flex-col items-center justify-center'>
 
                     <div className='text-blue-600 font-semibold text-3xl font-serif pb-5'>SignUp</div>
 
