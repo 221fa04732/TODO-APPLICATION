@@ -1,16 +1,22 @@
-import { LoginStatus } from './Atoms/LoginStatus'
-import {LandingPage} from './components/LandingPage'
-import { SignStatus } from './Atoms/SignStatus'
-import { useRecoilState } from 'recoil'
-import SignIn from './components/SignIn'
-import SignUp from './components/SignUp'
+import { lazy } from 'react'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
+const SignIn = lazy(()=> import('./components/SignIn')) 
+const SignUp = lazy(() => import('./components/SignUp'))
+const LandingPage = lazy(()=>import('./components/LandingPage'))
 
 function App() {
 
-  const [loginStatus, setLoginStatus] = useRecoilState(LoginStatus)
-  const [signStatus, setSignStatus] = useRecoilState(SignStatus)
+  return(
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<SignIn />} />
+        <Route path='/signIn' element={<SignIn />} />
+        <Route path='/signUp' element={<SignUp />} />
+        <Route path='/todo' element={<LandingPage />} />
+      </Routes>
+    </BrowserRouter>
+  )
 
-  return (<> {loginStatus.status ? <LandingPage /> : <>{signStatus.status===0 ? <SignIn /> : <SignUp />}</> } </>)
 }
 
 export default App

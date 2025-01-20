@@ -1,24 +1,24 @@
-import {LoginStatus} from '../Atoms/LoginStatus'
 import {NotificationAtom} from '../Atoms/NotificationAtom'
 import Notification from './Notification'
-import { useRecoilState } from 'recoil';
-import { SignStatus } from '../Atoms/SignStatus';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useState } from 'react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import DisplayPass from './DisplayPass';
+import { VisiblePass } from '../Atoms/VisiblePass';
 
 
 export default function SignUp(){
 
-    const [loginStatus, setLoginStatus] = useRecoilState(LoginStatus)
+    const navigate = useNavigate();
     const [notification, setNotification]= useRecoilState(NotificationAtom)
-    const [signStatus, setSignStatus] = useRecoilState(SignStatus)
     const [username, setUsername]= useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const visiblePassword = useRecoilValue(VisiblePass)
 
-    async function handlesubmit(event){
-
-        event.preventDefault();
+    async function signUpbtn(){
 
         try{
             const user=await axios.post('https://todo-application-cz2m.onrender.com/signup/user',{
@@ -31,12 +31,7 @@ export default function SignUp(){
                 setEmail('')
                 setPassword('')
                 setUsername('')
-                setLoginStatus({
-                    status : false
-                })
-                setSignStatus({
-                    status : 0
-                })
+                navigate('/signIn')
             }
 
             setNotification({
@@ -63,7 +58,7 @@ export default function SignUp(){
                 <div className='text-orange-600 font-semibold text-4xl font-serif'>TODO APP</div>
             </div>
             <div className='w-11/12 flex flex-col items-center justify-center'>
-                <form onSubmit={handlesubmit} className='w-full flex flex-col items-center justify-center'>
+                <div className='w-full flex flex-col items-center justify-center'>
 
                     <div className='text-blue-600 font-semibold text-3xl font-serif pb-5'>SignUp</div>
 
@@ -89,29 +84,28 @@ export default function SignUp(){
                         }}></input>
                     </fieldset>
 
-                    <fieldset className='border border-blue-400 rounded w-full mb-5'>
+                    <fieldset className='border border-blue-400 rounded w-full mb-5 flex items-center'>
                         <legend className='ml-3 font-semibold text-blue-400 px-1'>Password</legend>
                         <input className='border-none focus:outline-none w-full bg-stone-900 px-3 py-1 text-white'
-                        type='text'
+                        type={visiblePassword.signup === 0 ? 'password' : 'text'}
                         required
                         value={password}
                         onChange={(e)=>{
                             setPassword(e.target.value)
                         }}></input>
+
+                        <DisplayPass btntype={"signup"} />
+
                     </fieldset>
 
 
-                    <button type='submit' className='border bg-blue-700 rounded w-full border-blue-700 p-2 text-white font-semibold hover:bg-blue-600 mb-1'>SignUp</button>
+                    <button onClick={()=>{signUpbtn()}} className='border bg-blue-700 rounded w-full border-blue-700 p-2 text-white font-semibold hover:bg-blue-600 mb-1'>SignUp</button>
 
-                </form>
+                </div>
 
                 <div className='w-full'>
                     <span className='text-blue-600 text-lg'>Already Have an Account? </span>
-                    <button className='text-red-500'onClick={()=>{
-                        setSignStatus({
-                            status :0
-                        })
-                    }}>Click Here</button>
+                    <Link to={'/signIn'} >Click Here</Link>
                 </div>
 
             </div>

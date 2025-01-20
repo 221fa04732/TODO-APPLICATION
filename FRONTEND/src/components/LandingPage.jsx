@@ -7,21 +7,20 @@ import { Loading } from '../Atoms/LoaderAtom'
 import {NotificationAtom} from '../Atoms/NotificationAtom'
 import { useRecoilState } from 'recoil'
 import axios from 'axios'
-import {SignStatus} from '../Atoms/SignStatus'
 
 
-export function LandingPage(){
+export default function LandingPage(){
 
+    const id = localStorage.getItem('id')
     const[todo, setTodo] = useState([]);
     const[loading, setloading] = useRecoilState(Loading)
     const [notification, setNotification]= useRecoilState(NotificationAtom)
-    const [signstatus, setSignstatus] = useRecoilState(SignStatus)
 
     useEffect(()=>{
       fetch("https://todo-application-cz2m.onrender.com/your/todo-list", {
         method :"POST",
         body : JSON.stringify({
-            id : signstatus.id
+            id : id
         }),
         headers:{
             "Content-type": "application/json"
@@ -37,7 +36,7 @@ export function LandingPage(){
     useEffect(()=>{
       setInterval(async()=>{
         const tempTodo = await axios.post('https://todo-application-cz2m.onrender.com/your/todo-list',{
-          id : signstatus.id
+          id : id
         })
         setTodo(tempTodo.data.todo)
         setloading(false)

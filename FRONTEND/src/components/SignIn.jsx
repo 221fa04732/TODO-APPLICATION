@@ -1,23 +1,23 @@
-import {LoginStatus} from '../Atoms/LoginStatus'
 import {NotificationAtom} from '../Atoms/NotificationAtom'
 import Notification from './Notification'
-import { useRecoilState } from 'recoil';
-import { SignStatus } from '../Atoms/SignStatus';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { useState } from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import DisplayPass from './DisplayPass';
+import { VisiblePass } from '../Atoms/VisiblePass';
 
 export default function SignIn(){
 
-    const [loginStatus, setLoginStatus] = useRecoilState(LoginStatus)
+    const navigate = useNavigate();
     const [notification, setNotification]= useRecoilState(NotificationAtom)
-    const [signStatus, setSignStatus] =useRecoilState(SignStatus)
     const [email, setEmail]= useState('')
     const [password, setPassword] = useState('')
+    const [visiblePassword, setVisiblePassword] = useRecoilState(VisiblePass)
 
 
-    async function handlesubmit(event){
-
-        event.preventDefault();
+    async function signInbtn(){
 
         try{
             const user=await axios.post('https://todo-application-cz2m.onrender.com/signin/user',{
@@ -27,22 +27,19 @@ export default function SignIn(){
             );
             
             if(user.status === 200){
-
-                setSignStatus({
-                    status : 1,
-                    email : email,
-                    id : user.data.id,
-                    username : user.data.userName
-                })
+                localStorage.setItem('id', user.data.id)
+                localStorage.setItem('username', user.data.userName)
                 setEmail('')
                 setPassword('')
-                setLoginStatus({
-                    status : true
-                })
                 setNotification({
                     show : true,
                     message : `Welcome ${user.data.userName}`,
                     status : user.status
+                })
+                navigate('/todo')
+                setVisiblePassword({
+                    signin : 0,
+                    signup : 0
                 })
             }
 
@@ -75,7 +72,7 @@ export default function SignIn(){
             <div className='w-11/12 flex flex-col items-center justify-center'>
 
 
-                <form onSubmit={handlesubmit} className='w-full flex flex-col items-center justify-center'>
+                <div className='w-full flex flex-col items-center justify-center'>
 
                     <div className='text-blue-600 font-semibold text-3xl font-serif pb-5'>SignIn</div>
 
@@ -90,28 +87,26 @@ export default function SignIn(){
                         }}></input>
                     </fieldset>
 
-                    <fieldset className='border border-blue-400 rounded w-full mb-5'>
+                    <fieldset className='border border-blue-400 rounded w-full mb-5 flex items-center'>
                         <legend className='ml-3 font-semibold text-blue-400 px-1'>Password</legend>
                         <input className='border-none focus:outline-none w-full bg-stone-900 px-3 py-1 text-white'
-                        type='text'
+                        type={visiblePassword.signin === 0 ? 'password' : 'text'}
                         required
                         value={password}
                         onChange={(e)=>{
                             setPassword(e.target.value)
                         }}></input>
+                        
+                        <DisplayPass btntype={"signin"} />
                     </fieldset>
 
-                    <button className='border bg-blue-700 rounded w-full border-blue-700 p-2 text-white font-semibold hover:bg-blue-600 mb-1' type='submit'>SignIn</button>
+                    <button onClick={()=>{signInbtn()}} className='border bg-blue-700 rounded w-full border-blue-700 p-2 text-white font-semibold hover:bg-blue-600 mb-1'>SignIn</button>
 
-                </form>
+                </div>
 
                 <div className='w-full'>
                     <span className='text-blue-600 text-lg'>Don't Have an Account? </span>
-                    <button className='text-red-500'onClick={()=>{
-                        setSignStatus({
-                            status : 1
-                        })
-                    }}>Create One</button>
+                    <Link to={'/signUp'} >Create One</Link>
                 </div>
 
             </div>
@@ -121,4 +116,6 @@ export default function SignIn(){
         </div>
 
     </div>)
+
 }
+
