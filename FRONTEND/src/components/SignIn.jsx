@@ -63,59 +63,81 @@ export default function SignIn(){
     }
 
 
-    return(<div className="min-h-screen bg-stone-900 w-full flex items-center">
-        <div className='grid grid-cols-1 md:grid-cols-2 place-items-center py-10 px-5 w-full'>
-            <div className='flex flex-col justify-center items-center pb-16 md:pb-0'>  
-                <img src="/list.png" className='md:max-h-40 md:max-w-36 max-h-28 max-w-20 pb-3'/>
-                <div className='text-orange-600 font-semibold text-4xl font-serif'>TODO APP</div>
-            </div>
-            <div className='w-11/12 flex flex-col items-center justify-center'>
-
-
-                <div className='w-full flex flex-col items-center justify-center'>
-
-                    <div className='text-blue-600 font-semibold text-3xl font-serif pb-5'>SignIn</div>
-
-                    <fieldset className='border border-blue-400 rounded w-full mb-5'>
-                        <legend className='ml-3 font-semibold text-blue-400 px-1'>Email</legend>
-                        <input className='border-none focus:outline-none w-full bg-stone-900 px-3 py-1 text-white'
-                        type='text'
-                        required
-                        value={email}
-                        onChange={(e)=>{
-                            setEmail(e.target.value)
-                        }}></input>
-                    </fieldset>
-
-                    <fieldset className='border border-blue-400 rounded w-full mb-5 flex items-center'>
-                        <legend className='ml-3 font-semibold text-blue-400 px-1'>Password</legend>
-                        <input className='border-none focus:outline-none w-full bg-stone-900 px-3 py-1 text-white'
-                        type={visiblePassword.signin === 0 ? 'password' : 'text'}
-                        required
-                        value={password}
-                        onChange={(e)=>{
-                            setPassword(e.target.value)
-                        }}></input>
-                        
-                        <DisplayPass btntype={"signin"} />
-                    </fieldset>
-
-                    <button onClick={()=>{signInbtn()}} className='border bg-blue-700 rounded w-full border-blue-700 p-2 text-white font-semibold hover:bg-blue-600 mb-1'>SignIn</button>
-
+    return (
+    <div className="min-h-screen bg-gradient-to-br from-stone-800 to-stone-900 w-full flex items-center justify-center p-4">
+        <div className='max-w-4xl w-full bg-stone-800/50 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden border border-stone-700/50'>
+            <div className='grid grid-cols-1 md:grid-cols-2'>
+                {/* Left side - illustration */}
+                <div className='hidden md:flex bg-gradient-to-br from-blue-900/30 to-stone-900/70 items-center justify-center p-8'>
+                    <div className='text-center'>
+                        <h2 className='text-2xl font-bold text-blue-400 mb-2 font-sans'>Welcome Back</h2>
+                        <p className='text-stone-400'>Sign in to access your account!</p>
+                    </div>
                 </div>
+                
+                {/* Right side - form */}
+                <div className='p-8 md:p-10 flex flex-col'>
+                    <div className='text-center mb-8'>
+                        <h1 className='text-3xl font-bold text-blue-500 mb-1 font-sans'>Sign In</h1>
+                        <p className='text-stone-400'>Enter your credentials to continue</p>
+                    </div>
 
-                <div className='w-full'>
-                    <span className='text-blue-600 text-lg'>Don't Have an Account? </span>
-                    <Link to={'/signUp'} >Create One</Link>
+                    <div className='space-y-6'>
+                        <div className='space-y-1'>
+                            <label className='block text-sm font-medium text-stone-300'>Email</label>
+                            <div className='relative'>
+                                <input 
+                                    className='w-full bg-stone-700/50 border border-stone-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all'
+                                    type='text'
+                                    required
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder='your@email.com'
+                                />
+                            </div>
+                        </div>
+
+                        <div className='space-y-1'>
+                            <label className='block text-sm font-medium text-stone-300'>Password</label>
+                            <div className='relative'>
+                                <input 
+                                    className='w-full bg-stone-700/50 border border-stone-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all pr-12'
+                                    type={visiblePassword.signin === 0 ? 'password' : 'text'}
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder='••••••••'
+                                />
+                                <div className='absolute inset-y-0 right-0 flex items-center pr-3'>
+                                    <DisplayPass btntype={"signin"} />
+                                </div>
+                            </div>
+                        </div>
+
+                        <button 
+                            onClick={() => signInbtn()} 
+                            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
+                        >
+                            Sign In
+                        </button>
+                    </div>
+
+                    <div className='mt-6 text-center text-sm text-stone-400'>
+                        Don't have an account?{' '}
+                        <Link 
+                            to={'/signUp'} 
+                            className='text-blue-500 hover:text-blue-400 font-medium transition-colors'
+                        >
+                            Create one
+                        </Link>
+                    </div>
                 </div>
-
             </div>
         </div>
 
-        <div className={`fixed ${notification.show ? 'block' : 'hidden'} right-4 top-4 z-20`}><Notification type={290} message={"An Error Occured"}/>
+        <div className={`fixed ${notification.show ? 'block' : 'hidden'} right-4 top-4 z-20`}>
+            <Notification type={290} message={"An Error Occured"}/>
         </div>
-
-    </div>)
-
+    </div>
+)
 }
-

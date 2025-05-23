@@ -1,29 +1,30 @@
 import { useRecoilState } from "recoil"
 import { VisiblePass } from "../Atoms/VisiblePass"
 
-export default function DisplayPass(props){
-
+export default function DisplayPass({ btntype }) {
     const [visible, setVisible] = useRecoilState(VisiblePass)
 
-    return(<button onClick={(   )=>{
+    const toggleVisibility = () => {
+        setVisible(prev => ({
+            ...prev,
+            [btntype]: prev[btntype] === 0 ? 1 : 0
+        }))
+    }
 
-        if (props.btntype === "signin") 
-        {
-            setVisible((prev) => ({
-                ...prev,
-                signin: prev.signin === 0 ? 1 : 0,
-            }));
-        } 
+    const iconSrc = visible[btntype] === 0 ? "eye-solid.svg" : "eye-slash-solid.svg"
 
-        else if(props.btntype === "signup")
-        {
-            setVisible((prev) => ({
-                ...prev,
-                signup: prev.signup === 0 ? 1 : 0,
-            }));
-        }
-        
-    }}>
-        {props.btntype === "signin" ? <img className='min-h-8 max-h-8 min-w-8 max-w-8 pr-2 pb-2' src={visible.signin === 0 ? "eye-solid.svg" : "eye-slash-solid.svg"}/> : <img className='min-h-8 max-h-8 min-w-8 max-w-8 pr-2 pb-2' src={visible.signup === 0 ? "eye-solid.svg" : "eye-slash-solid.svg"}/>}
-    </button>)
+    return (
+        <button 
+            onClick={toggleVisibility}
+            className="p-2 text-gray-400 hover:text-blue-500 transition-colors focus:outline-none"
+            type="button"
+            aria-label={visible[btntype] === 0 ? "Show password" : "Hide password"}
+        >
+            <img 
+                className="h-5 w-5" 
+                src={iconSrc} 
+                alt={visible[btntype] === 0 ? "Visible" : "Hidden"}
+            />
+        </button>
+    )
 }

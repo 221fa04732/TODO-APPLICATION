@@ -51,68 +51,91 @@ export default function SignUp(){
 
     }
 
-    return(<div className="min-h-screen bg-stone-900 w-full flex items-center">
-        <div className='grid grid-cols-1 md:grid-cols-2 place-items-center py-10 px-5 w-full'>
-            <div className='flex flex-col justify-center items-center pb-16 md:pb-0'>  
-                <img src="/list.png" className='md:max-h-40 md:max-w-36 max-h-28 max-w-20 pb-3'/>
-                <div className='text-orange-600 font-semibold text-4xl font-serif'>TODO APP</div>
-            </div>
-            <div className='w-11/12 flex flex-col items-center justify-center'>
-                <div className='w-full flex flex-col items-center justify-center'>
-
-                    <div className='text-blue-600 font-semibold text-3xl font-serif pb-5'>SignUp</div>
-
-                    <fieldset className='border border-blue-400 rounded w-full mb-5'>
-                        <legend className='ml-3 font-semibold text-blue-400 px-1'>UserName</legend>
-                        <input className='border-none focus:outline-none w-full bg-stone-900 px-3 py-1 text-white'
-                        type='text'
-                        required
-                        value={username}
-                        onChange={(e)=>{
-                            setUsername(e.target.value)
-                        }}></input>
-                    </fieldset>
-
-                    <fieldset className='border border-blue-400 rounded w-full mb-5'>
-                        <legend className='ml-3 font-semibold text-blue-400 px-1'>Email</legend>
-                        <input className='border-none focus:outline-none w-full bg-stone-900 px-3 py-1 text-white'
-                        type='text'
-                        required
-                        value={email}
-                        onChange={(e)=>{
-                            setEmail(e.target.value)
-                        }}></input>
-                    </fieldset>
-
-                    <fieldset className='border border-blue-400 rounded w-full mb-5 flex items-center'>
-                        <legend className='ml-3 font-semibold text-blue-400 px-1'>Password</legend>
-                        <input className='border-none focus:outline-none w-full bg-stone-900 px-3 py-1 text-white'
-                        type={visiblePassword.signup === 0 ? 'password' : 'text'}
-                        required
-                        value={password}
-                        onChange={(e)=>{
-                            setPassword(e.target.value)
-                        }}></input>
-
-                        <DisplayPass btntype={"signup"} />
-
-                    </fieldset>
-
-
-                    <button onClick={()=>{signUpbtn()}} className='border bg-blue-700 rounded w-full border-blue-700 p-2 text-white font-semibold hover:bg-blue-600 mb-1'>SignUp</button>
-
+    return (
+    <div className="min-h-screen bg-gradient-to-br from-stone-800 to-stone-900 w-full flex items-center justify-center p-4">
+        <div className='max-w-4xl w-full bg-stone-800/50 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden border border-stone-700/50'>
+            <div className='grid grid-cols-1 md:grid-cols-2'>
+                {/* Left side - illustration */}
+                <div className='hidden md:flex bg-gradient-to-br from-blue-900/30 to-stone-900/70 items-center justify-center p-8'>
+                    <div className='text-center'>
+                        <h2 className='text-2xl font-bold text-blue-400 mb-2 font-sans'>Join Us</h2>
+                        <p className='text-stone-400'>Create your account to start your journey with us</p>
+                    </div>
                 </div>
+                
+                {/* Right side - form */}
+                <div className='p-8 md:p-10 flex flex-col'>
+                    <div className='text-center mb-8'>
+                        <h1 className='text-3xl font-bold text-blue-500 mb-1 font-sans'>Sign Up</h1>
+                        <p className='text-stone-400'>Create your account in just a few steps</p>
+                    </div>
 
-                <div className='w-full'>
-                    <span className='text-blue-600 text-lg'>Already Have an Account? </span>
-                    <Link to={'/signIn'} >Click Here</Link>
+                    <div className='space-y-6'>
+                        <div className='space-y-1'>
+                            <label className='block text-sm font-medium text-stone-300'>Username</label>
+                            <input 
+                                className='w-full bg-stone-700/50 border border-stone-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all'
+                                type='text'
+                                required
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder='Enter your username'
+                            />
+                        </div>
+
+                        <div className='space-y-1'>
+                            <label className='block text-sm font-medium text-stone-300'>Email</label>
+                            <input 
+                                className='w-full bg-stone-700/50 border border-stone-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all'
+                                type='text'
+                                required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder='your@email.com'
+                            />
+                        </div>
+
+                        <div className='space-y-1'>
+                            <label className='block text-sm font-medium text-stone-300'>Password</label>
+                            <div className='relative'>
+                                <input 
+                                    className='w-full bg-stone-700/50 border border-stone-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all pr-12'
+                                    type={visiblePassword.signup === 0 ? 'password' : 'text'}
+                                    required
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    placeholder='••••••••'
+                                />
+                                <div className='absolute inset-y-0 right-0 flex items-center pr-3'>
+                                    <DisplayPass btntype={"signup"} />
+                                </div>
+                            </div>
+                        </div>
+
+                        <button 
+                            onClick={() => signUpbtn()} 
+                            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
+                        >
+                            Sign Up
+                        </button>
+                    </div>
+
+                    <div className='mt-6 text-center text-sm text-stone-400'>
+                        Already have an account?{' '}
+                        <Link 
+                            to={'/signIn'} 
+                            className='text-blue-500 hover:text-blue-400 font-medium transition-colors'
+                        >
+                            Click Here
+                        </Link>
+                    </div>
                 </div>
-
             </div>
         </div>
 
-        <div className={`fixed ${notification.show ? 'block' : 'hidden'} right-4 top-4 z-20`}><Notification type={290} message={"An Error Occured"}/>
+        <div className={`fixed ${notification.show ? 'block' : 'hidden'} right-4 top-4 z-20`}>
+            <Notification type={290} message={"An Error Occured"}/>
         </div>
-
-    </div>)
+    </div>
+)
 }
