@@ -110,7 +110,7 @@ export default function LandingPage() {
             <div className='flex justify-center pt-20 pb-28 w-full'>
                 {loading ? <Loader /> : <Todo todo={todo} />}
             </div>
-            <div className='fixed flex justify-center bottom-0 w-full text-center py-4 bg-stone-800 z-10 border-t border-stone-700'>
+            <div className='fixed flex justify-center bottom-0 w-full text-center py-2 bg-stone-800 z-10 border-t border-stone-700 '>
                 <CreateTodo />
             </div>
             <div className={`fixed right-4 top-4 z-50 transition-all duration-300 ease-out ${notification.show ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'}`}>

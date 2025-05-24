@@ -17,9 +17,11 @@ export default function SignUp(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const visiblePassword = useRecoilValue(VisiblePass)
+    const [loader, setLoader] = useState(false)
 
     async function signUpbtn(){
 
+        setLoader(true)
         try{
             const user=await axios.post('https://todo-application-cz2m.onrender.com/signup/user',{
                 UserName : username,
@@ -47,6 +49,9 @@ export default function SignUp(){
                 message : "An Error Occured",
                 status : 404
             })
+        }
+        finally{
+            setLoader(false)
         }
 
     }
@@ -112,12 +117,13 @@ export default function SignUp(){
                             </div>
                         </div>
 
+                        {loader ? <button 
+                            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'>Please wait
+                        </button> : 
                         <button 
                             onClick={() => signUpbtn()} 
-                            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
-                        >
-                            Sign Up
-                        </button>
+                            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'>Sign Up
+                        </button>}
                     </div>
 
                     <div className='mt-6 text-center text-sm text-stone-400'>

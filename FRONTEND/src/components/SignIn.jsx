@@ -15,10 +15,12 @@ export default function SignIn(){
     const [email, setEmail]= useState('')
     const [password, setPassword] = useState('')
     const [visiblePassword, setVisiblePassword] = useRecoilState(VisiblePass)
+    const [loader, setLoader] = useState(false)
 
 
     async function signInbtn(){
 
+        setLoader(true)
         try{
             const user=await axios.post('https://todo-application-cz2m.onrender.com/signin/user',{
                     Email : email, 
@@ -58,6 +60,9 @@ export default function SignIn(){
                 message : "An Error Occured",
                 status : 404
             })
+        }
+        finally{
+            setLoader(false)
         }
 
     }
@@ -114,12 +119,17 @@ export default function SignIn(){
                             </div>
                         </div>
 
-                        <button 
+                        {loader ? <button  
+                            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'>
+                            Please wait
+                        </button> : 
+                            
+                            <button 
                             onClick={() => signInbtn()} 
-                            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'
-                        >
+                            className='w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-[1.01] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50'>
                             Sign In
-                        </button>
+                        </button>}
+
                     </div>
 
                     <div className='mt-6 text-center text-sm text-stone-400'>
