@@ -9,7 +9,7 @@ function App() {
   return(
     <BrowserRouter>
       <Routes>
-        <Route index element={<SignIn />} />
+        <Route index element={<LandingPage />} />
         <Route path='/signIn' element={<SignIn />} />
         <Route path='/signUp' element={<SignUp />} />
         <Route path='/todo' element={<LandingPage />} />

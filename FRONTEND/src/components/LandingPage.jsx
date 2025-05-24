@@ -7,12 +7,15 @@ import { Loading } from '../Atoms/LoaderAtom'
 import { NotificationAtom } from '../Atoms/NotificationAtom'
 import { useRecoilState } from 'recoil'
 import axios from 'axios'
+import SignIn from './SignIn'
+import { useNavigate } from 'react-router-dom'
 
 export default function LandingPage() {
     const id = localStorage.getItem('id')
     const [todo, setTodo] = useState([])
     const [loading, setloading] = useRecoilState(Loading)
     const [notification, setNotification] = useRecoilState(NotificationAtom)
+    const Navigate = useNavigate()
 
     useEffect(() => {
         fetch("https://todo-application-cz2m.onrender.com/your/todo-list", {
@@ -41,6 +44,12 @@ export default function LandingPage() {
 
         return () => clearInterval(interval)
     }, [id])
+
+    if(!id){
+      return (
+        <SignIn />
+      )
+    }
 
     return (
         <div className='bg-stone-800 text-white w-full min-h-screen'>
@@ -87,9 +96,13 @@ export default function LandingPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                   </svg>
                 </button>
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-medium">
-                  U
-                </div>
+                <button className="px-2 h-8 rounded-md bg-gradient-to-br from-blue-500 to-cyan-400 flex items-center justify-center text-white font-medium"
+                onClick={()=>{
+                  localStorage.removeItem("id")
+                  Navigate('/signIn')
+                }}>
+                  Logout
+                </button>
               </div>
             </div>
           </div>
