@@ -2,7 +2,7 @@
 
 Visit Us : [todoapplication.tech](https://todoapplication.tech/)
 
-![Screenshot 2024-12-18 192751](https://github.com/user-attachments/assets/18f7f29c-cae7-4c4a-a31a-72f0924ba50a)
+![image](https://github.com/user-attachments/assets/4efee741-27ec-4d5a-8062-361ee1e5393c)
 
 This project contain a simple TODO application that have some basic functionality that user can perform on it.
 
